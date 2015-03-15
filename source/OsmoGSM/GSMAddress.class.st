@@ -35,6 +35,12 @@ GSMAddress >> address: anAddress [
 ]
 
 { #category : #'as yet unclassified' }
+GSMAddress >> encodeGSM [
+	"Skip the length.. we don't care about efficency right now"
+	^self encodeSMSAddress allButFirst
+]
+
+{ #category : #'as yet unclassified' }
 GSMAddress >> encodeSMSAddress [
 	"TODO.. Create address subclasses?"
 	^typeOfNumber = self class tonAlphanumeric
