@@ -8,3 +8,10 @@ String >> asGSM7Bit [
 	^GSMEncoding encode: self
 
 ]
+
+{ #category : #'*OsmoGSM-coding' }
+String >> asUSSD7Bit [
+        "I convert a string into a 7bit encoded string. I know about
+        padding rules for USSD messages."
+        ^GSMUSSDEncoding encode: self.
+]
