@@ -9,15 +9,20 @@ Class {
 
 { #category : #'as yet unclassified' }
 GSMAddressCoding class >> decodeSMSAddress: aStream [
-	| len tmp ton npi |
+	| len byteLen tmp ton npi data |
 	len := aStream next.
 	tmp := aStream next.
 	ton := (tmp bitShift: -4) bitAnd: 2r111.
 	npi := (tmp bitAnd: 2r1111).
 
+	byteLen := ((len + 1) / 2) asInteger.
+	data := aStream next: byteLen.
+	data size = byteLen
+		ifFalse: [^self error: 'Short Read on Pharo'].
+
 	ton = GSMAddress tonAlphanumeric ifTrue: [
 		| addr |
-		addr := aStream upToEnd decodeGSM7Bit.
+		addr := data decodeGSM7Bit.
 		len odd ifTrue: [
 			addr := addr allButLast].
 		^GSMAddress new
@@ -29,7 +34,7 @@ GSMAddressCoding class >> decodeSMSAddress: aStream [
 	^GSMAddress new
 		typeOfNumber: ton;
 		numberingPlan: npi;
-		address: (GSMNumberDigits decodeFrom: aStream upToEnd);
+		address: (GSMNumberDigits decodeFrom: data);
 		yourself.
 ]
 

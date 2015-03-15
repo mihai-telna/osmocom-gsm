@@ -9,8 +9,26 @@ Class {
 
 { #category : #'as yet unclassified' }
 GSMAddressCodingTest >> testAlphanumericDecoding [
-	| res |
-	res := GSMAddressCoding decodeSMSAddress: #[16r0d 16rd0 16rf3 16r34 16rfc 16r1c 16ra6 16r97 16r1b] readStream.
+	| res stream |
+	stream := #[16r0d 16rd0 16rf3 16r34 16rfc 16r1c 16ra6 16r97 16r1b] readStream.
+	res := GSMAddressCoding decodeSMSAddress: stream.
+	self assert: stream atEnd.
+	self assert: res typeOfNumber equals: GSMAddress tonAlphanumeric.
+	self assert: res numberingPlan equals: 0.
+	self assert: res address equals: 'sipgate'.
+]
+
+{ #category : #'as yet unclassified' }
+GSMAddressCodingTest >> testAlphanumericDecodingExtraData [
+	| res stream |
+	stream := #[16r0d 16rd0 16rf3 16r34 16rfc 16r1c 16ra6 16r97 16r1b 16rFF] readStream.
+	res := GSMAddressCoding decodeSMSAddress: stream.
+
+	"Verify we don't consume everything"
+	self deny: stream atEnd.
+	self assert: stream next equals: 16rFF.
+	self assert: stream atEnd.
+
 	self assert: res typeOfNumber equals: GSMAddress tonAlphanumeric.
 	self assert: res numberingPlan equals: 0.
 	self assert: res address equals: 'sipgate'.
@@ -29,8 +47,25 @@ GSMAddressCodingTest >> testAlphanumericEncoding [
 
 { #category : #'as yet unclassified' }
 GSMAddressCodingTest >> testNormalDecoding [
-	| res |
-	res := GSMAddressCoding decodeSMSAddress: #[12 145 83 52 88 0 16 145] readStream.
+	| res stream |
+	stream := #[12 145 83 52 88 0 16 145] readStream.
+	res := GSMAddressCoding decodeSMSAddress: stream.
+	self assert: stream atEnd.
+	self assert: res typeOfNumber equals: GSMAddress tonInternational.
+	self assert: res numberingPlan equals: GSMAddress npISDN.
+	self assert: res address equals: '354385000119'.
+]
+
+{ #category : #'as yet unclassified' }
+GSMAddressCodingTest >> testNormalDecodingExtraData [
+	| res stream |
+	stream := #[12 145 83 52 88 0 16 145 255] readStream.
+	res := GSMAddressCoding decodeSMSAddress: stream.
+
+	self deny: stream atEnd.
+	self assert: stream next equals: 255.
+	self assert: stream atEnd.
+	
 	self assert: res typeOfNumber equals: GSMAddress tonInternational.
 	self assert: res numberingPlan equals: GSMAddress npISDN.
 	self assert: res address equals: '354385000119'.
