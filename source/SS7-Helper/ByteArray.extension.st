@@ -6,6 +6,11 @@ ByteArray >> fromE164 [
 ]
 
 { #category : #'*SS7-Helper' }
+ByteArray >> fromE212 [
+	^GSMNumberDigits decodeFrom: self allButFirst
+]
+
+{ #category : #'*SS7-Helper' }
 ByteArray >> fromTBCD [
 	^GSMNumberDigits decodeFrom: self asByteArray
 ]

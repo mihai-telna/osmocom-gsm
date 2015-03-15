@@ -6,6 +6,11 @@ ByteString >> toE164 [
 ]
 
 { #category : #'*SS7-Helper' }
+ByteString >> toE212 [
+	^(#(16r96) , (GSMNumberDigits encodeFrom: self)) asByteArray
+]
+
+{ #category : #'*SS7-Helper' }
 ByteString >> toTBCD [
 	^ GSMNumberDigits encodeFrom: self
 ]
