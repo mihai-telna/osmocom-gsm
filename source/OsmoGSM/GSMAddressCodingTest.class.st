@@ -57,6 +57,17 @@ GSMAddressCodingTest >> testAlphanumericEncoding [
 ]
 
 { #category : #'as yet unclassified' }
+GSMAddressCodingTest >> testAlphanumericEncodingSkype [
+	| addr |
+	addr := GSMAddress new
+				typeOfNumber: GSMAddress tonAlphanumeric;
+				numberingPlan: 0;
+				address: 'skype';
+				yourself.
+	self assert: (addr encodeSMSAddress) equals: #[9 208 243 117 30 94 6 ].
+]
+
+{ #category : #'as yet unclassified' }
 GSMAddressCodingTest >> testNormalDecoding [
 	| res stream |
 	stream := #[12 145 83 52 88 0 16 145] readStream.
