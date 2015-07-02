@@ -22,9 +22,7 @@ GSMAddressCoding class >> decodeSMSAddress: aStream [
 
 	ton = GSMAddress tonAlphanumeric ifTrue: [
 		| addr |
-		addr := data decodeGSM7Bit.
-		len odd ifTrue: [
-			addr := addr allButLast].
+		addr := GSMUSSDDecoding decode: data.
 		^GSMAddress new
 			typeOfNumber: ton;
 			numberingPlan: npi;
