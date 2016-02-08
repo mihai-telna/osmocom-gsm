@@ -150,3 +150,26 @@ ConfigurationOfOsmoGSM >> project [
 		project loadType: #linear. "change to #atomic if desired"
 		project ]
 ]
+
+{ #category : #'symbolic versions' }
+ConfigurationOfOsmoGSM >> stable: spec [
+	<symbolicVersion: #'stable'>
+
+	spec for: #'common' version: '1'.
+
+]
+
+{ #category : #versions }
+ConfigurationOfOsmoGSM >> version1: spec [
+	<version: '1' imports: #('0.1-baseline' )>
+
+	spec for: #'common' do: [
+		spec blessing: #'stable'.
+		spec description: 'version 1'.
+		spec author: 'HolgerHansPeterFreyther'.
+		spec timestamp: '2/8/2016 11:54'.
+		spec 
+			package: #OsmoGSM with: 'OsmoGSM-HolgerHansPeterFreyther.17';
+			package: #'SS7-Helper' with: 'SS7-Helper-NorbertHartl.5'. ].
+
+]
