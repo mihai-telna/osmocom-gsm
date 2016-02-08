@@ -122,6 +122,20 @@ ConfigurationOfOsmoGSM >> baseline01: spec [
 
 ]
 
+{ #category : #baselines }
+ConfigurationOfOsmoGSM >> baseline02: spec [
+	<version: '0.2-baseline'>
+
+	spec for: #'common' do: [
+		spec blessing: #'baseline'.
+		spec repository: 'http://smalltalkhub.com/mc/osmocom/GSM/main'.
+		spec 
+			package: #OsmoGSM;
+			package: #'SS7-Helper'.
+		spec group: 'default' with: #(#OsmoGSM #'SS7-Helper' ). ].
+
+]
+
 { #category : #accessing }
 ConfigurationOfOsmoGSM >> customProjectAttributes [
 	 "Edit to return a collection of any custom attributes e.g. for conditional loading: Array with: #'Condition1' with: #'Condition2.
@@ -134,7 +148,7 @@ ConfigurationOfOsmoGSM >> customProjectAttributes [
 ConfigurationOfOsmoGSM >> development: spec [
 	<symbolicVersion: #'development'>
 
-	spec for: #'common' version: '0.1-baseline'.
+	spec for: #'common' version: '0.2-baseline'.
 
 ]
 
