@@ -116,7 +116,8 @@ ConfigurationOfOsmoGSM >> baseline01: spec [
 		spec blessing: #'baseline'.
 		spec repository: 'http://smalltalkhub.com/mc/osmocom/GSM/main'.
 		spec 
-			package: #OsmoGSM;
+			package: #OsmoGSM with: [
+				spec requires: #(#'SS7-Helper' ). ];
 			package: #'SS7-Helper'.
 		spec group: 'default' with: #(#OsmoGSM #'SS7-Helper' ). ].
 
@@ -130,7 +131,8 @@ ConfigurationOfOsmoGSM >> baseline02: spec [
 		spec blessing: #'baseline'.
 		spec repository: 'http://smalltalkhub.com/mc/osmocom/GSM/main'.
 		spec 
-			package: #OsmoGSM;
+			package: #OsmoGSM with: [
+				spec requires: #(#'SS7-Helper' ). ];
 			package: #'SS7-Helper'.
 		spec group: 'default' with: #(#OsmoGSM #'SS7-Helper' ). ].
 
