@@ -171,7 +171,7 @@ ConfigurationOfOsmoGSM >> project [
 ConfigurationOfOsmoGSM >> stable: spec [
 	<symbolicVersion: #'stable'>
 
-	spec for: #'common' version: '1'.
+	spec for: #'common' version: '2'.
 
 ]
 
@@ -187,5 +187,20 @@ ConfigurationOfOsmoGSM >> version1: spec [
 		spec 
 			package: #OsmoGSM with: 'OsmoGSM-HolgerHansPeterFreyther.17';
 			package: #'SS7-Helper' with: 'SS7-Helper-NorbertHartl.5'. ].
+
+]
+
+{ #category : #versions }
+ConfigurationOfOsmoGSM >> version2: spec [
+	<version: '2' imports: #('0.2-baseline' )>
+
+	spec for: #'common' do: [
+		spec blessing: #'stable'.
+		spec description: 'version 2'.
+		spec author: 'HolgerHansPeterFreyther'.
+		spec timestamp: '2/17/2016 11:19'.
+		spec 
+			package: #'SS7-Helper' with: 'SS7-Helper-HolgerHansPeterFreyther.6';
+			package: #OsmoGSM with: 'OsmoGSM-HolgerHansPeterFreyther.17'. ].
 
 ]
